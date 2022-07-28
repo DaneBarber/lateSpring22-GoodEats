@@ -9,6 +9,7 @@ namespace GoodEats.Models
     public string Name { get; set; }
     public string Location { get; set; }
     public string Category { get; set; }
+    public string Picture { get; set; }
 
     public int AverageRating { get; set; }
     public int TotalReviews { get; set; }
