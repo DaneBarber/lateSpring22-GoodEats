@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using CodeWorks.Auth0Provider;
 using GoodEats.Models;
 using GoodEats.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -19,12 +21,12 @@ namespace GoodEats.Controllers
 
     [HttpPost]
     [Authorize]
-    public ActionResult<Review> Create([FromBody] Review data)
+    public async Task<ActionResult<Review>> Create([FromBody] Review data)
     {
       try
       {
-        // TODO creatorId
-        
+        var user = await HttpContext.GetUserInfoAsync<Account>();
+        data.CreatorId = user?.Id;
         Review review = _reviewsService.create(data);
         return Ok(review);
       }
