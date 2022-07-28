@@ -1,5 +1,6 @@
 <template>
-  <div class="m-4 elevation-2 d-flex justify-content-between">
+  <div data-bs-target="#restaurant-modal" data-bs-toggle="modal"
+    class="m-4 elevation-2 d-flex justify-content-between selectable" @click="setActive">
     <div class="d-flex">
       <img class="img-fluid" :src="restaurant.picture" :alt="restaurant.name + ' picture'">
       <div class="ms-4 d-flex flex-column justify-content-center">
@@ -20,6 +21,10 @@
 
 
 <script>
+import { restaurantsService } from '../services/RestaurantsService.js'
+import { logger } from '../utils/Logger.js'
+import Pop from '../utils/Pop.js'
+
 export default {
   props: {
     restaurant: {
@@ -29,7 +34,14 @@ export default {
   },
   setup(props) {
     return {
-
+      async setActive() {
+        try {
+          restaurantsService.setActive(props.restaurant)
+        } catch (error) {
+          Pop.toast("Something went wrong", "error")
+          logger.error(error)
+        }
+      }
     }
   }
 }
