@@ -52,6 +52,8 @@ SELECT r.*, a.*, res.* FROM reviews r
         WHERE creatorId = "629f92991449f1ae99772122";
 
 
+ALTER table restaurants ADD COLUMN picture VARCHAR(255);
+
 INSERT INTO restaurants(name, location, category)
 VALUES("Big B Cheese","Boise","Pizza");
 
