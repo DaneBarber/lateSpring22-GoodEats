@@ -6,5 +6,7 @@ export const AppState = reactive({
   account: {},
   activeRestaurant: {},
   restaurants: [],
-  reviews: []
+  reviews: [],
+  activeProfile: {},
+  profileReviews: []
 })

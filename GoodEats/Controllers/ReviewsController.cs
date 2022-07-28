@@ -28,6 +28,7 @@ namespace GoodEats.Controllers
         var user = await HttpContext.GetUserInfoAsync<Account>();
         data.CreatorId = user?.Id;
         Review review = _reviewsService.create(data);
+        review.Creator = user;
         return Ok(review);
       }
       catch (System.Exception error)

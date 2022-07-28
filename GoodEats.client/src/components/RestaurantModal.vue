@@ -15,19 +15,21 @@
               <p>{{ restaurant.location }}</p>
             </div>
             <div class="mt-4">
-              <form class="text-end">
+              <form @submit.prevent="createReview" class="text-end">
                 <div class="d-flex justify-content-between">
                   <label for="body"><small>Write a review</small></label>
                   <div class="d-flex flex-column">
                     <label for="rating"><small>rating</small></label>
-                    <input type="number" min="1" max="5" />
+                    <input type="number" min="1" max="5" required v-model="review.rating" />
                   </div>
                 </div>
-                <textarea class="w-100" name="body" id="body" rows="5"></textarea>
+                <textarea class="w-100" name="body" id="body" rows="5" v-model="review.body"></textarea>
                 <button class="btn btn-success">Submit</button>
               </form>
             </div>
-            <div> {{ reviews }} </div>
+            <div class="mt-4 reviews scrollable-y">
+              <Review v-for="r in reviews" :key="r.id" :review="r" />
+            </div>
           </div>
         </div>
       </div>
@@ -36,14 +38,28 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import { AppState } from '../AppState.js'
+import { reviewsService } from '../services/ReviewsService.js'
+import { logger } from '../utils/Logger.js'
+import Pop from '../utils/Pop.js'
 
 export default {
   setup() {
+    const review = reactive({})
+
     return {
+      review,
       restaurant: computed(() => AppState.activeRestaurant),
-      reviews: computed(() => AppState.reviews)
+      reviews: computed(() => AppState.reviews),
+      async createReview() {
+        try {
+          await reviewsService.createReview({ body: review.body, rating: review.rating, restaurantId: AppState.activeRestaurant.id })
+        } catch (error) {
+          Pop.toast("Call the MIB", 'error')
+          logger.log(error)
+        }
+      }
     }
   }
 }
@@ -52,5 +68,9 @@ export default {
 img {
   width: 100%;
   object-fit: cover;
+}
+
+.reviews {
+  max-height: 30vh;
 }
 </style>
