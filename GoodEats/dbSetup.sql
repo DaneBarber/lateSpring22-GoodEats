@@ -58,3 +58,25 @@ VALUES("Big B Cheese","Boise","Pizza");
 
 INSERT INTO reviews(rating, body, restaurantId, creatorId)
 VALUES(1,"meh", 1, "629f92991449f1ae99772122");
+
+INSERT INTO reviews(rating, body, restaurantId, creatorId)
+VALUES(3,"It was Aladeen", 1, "629f92991449f1ae99772122");
+
+INSERT INTO reviews(rating, body, restaurantId, creatorId)
+VALUES(3,"Can you say delicioso!", 5, "62dec2a3801db9b7e20daf8c");
+
+INSERT INTO reviews(rating, body, restaurantId, creatorId)
+VALUES(2,"Worst place to eat in town there was hair in my food. YUK", 3, "62dec2a3801db9b7e20daf8c");
+
+INSERT INTO reviews(rating, body, restaurantId, creatorId)
+VALUES(1,"SO GROSS", 3, "62dec2a3801db9b7e20daf8c");
+INSERT INTO reviews(rating, body, restaurantId, creatorId)
+VALUES(5,"SOOOOOO GOOOD", 3, "62dec2a3801db9b7e20daf8c");
+
+
+INSERT INTO reviews(rating, body, restaurantId, creatorId)
+VALUES(2,"I over ate here I can't believe they would allow you to eat so much food it is so irresponsible! This place should be forced to take better care of their patrons.", 6, "629f92991449f1ae99772122");
+
+
+
+
